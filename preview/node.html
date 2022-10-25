@@ -1,0 +1,170 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:node</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<h3 id="node-">node基础语法</h3>
+<h4 id="-">打开文件：</h4>
+<pre><code class="lang-javascript">fs.readFile(puth[, options], callback)
+</code></pre>
+<h4 id="-">写入文件</h4>
+<pre><code class="lang-javascript">fs.writeFile(file, data[, options], cailback)
+
+//第一个参数, 必选参数，需要指定一个文件的路径字符串，表示文件的存放路径
+
+//第二个参数，表示要写入的文件内容
+
+//第三个参数，表示文件以什么编码格式写入，默认utf-8格式
+
+//第四个参数 回调函数
+</code></pre>
+<h4 id="path-">path 路径拼接</h4>
+<ul>
+<li>获取路径中的文件名称</li>
+</ul>
+<pre><code class="lang-node">path.join([...paths])
+</code></pre>
+<pre><code>path.basename(path[, ext])
+path 文件路径 
+ext 筛选的文件名称
+</code></pre><ul>
+<li>获取路径中的扩展名</li>
+</ul>
+<pre><code>path.extname(path)
+path 为存放文件的路径
+</code></pre><h4 id="exec-">exec() 方法</h4>
+<pre><code class="lang-javascript">// 用于检索正则表达式
+正则表达式语法.exec(string)
+</code></pre>
+<p>regStyle 提取内嵌的style标签</p>
+<p>regScript 提取内嵌的 script 标签</p>
+<h3 id="http-">HTTP 模块</h3>
+<p>通过几行代码，搭建一个web服务器</p>
+<h4 id="-web-">创建 web 服务器</h4>
+<ol>
+<li><p>导入 http 模块</p>
+</li>
+<li><p>创建 web 服务器实例</p>
+</li>
+<li><p>为服务器绑定 request 事件</p>
+</li>
+<li><p>启动服务器</p>
+<pre><code class="lang-javascript">const http = require(&#39;http&#39;)
+
+// 创建 web 服务器实例
+// 调用 http.createSever() 方法 
+const server = http.createServer()
+
+server.on(&#39;request&#39;, function(req, res) {
+  const str = `数据请求类型为${req.method}, 请求地址为${req.url}`
+  console.log(str)
+  // 为了防止中文乱码的问题，需要设置响应头 Content-type 
+  res.setHeader(&#39;Content-Type&#39;, &#39;text/html;charset=utf-8&#39;)
+  // res.end()
+  // 向客户端发起指定的内容， 并结束这次的请求处理过程
+  res.end(str)
+})
+
+// 启动服务器
+server.listen(80, function() {
+  console.log(&#39;http server runing at http://127.0.0.1&#39;)
+})
+</code></pre>
+<h3 id="-npm-">切换 npm 的下包镜像源</h3>
+<p>查看当前下包的服务器地址</p>
+<p>npm config get registry </p>
+<p>（<a href="https://registry.npmjs.org/）官方地址">https://registry.npmjs.org/）官方地址</a></p>
+<p>将下包的镜像源切换为淘宝镜像源</p>
+<p>npm config set registry=<a href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org/</a></p>
+</li>
+</ol>
+<p>   使用nrm 工具快速切换镜像源</p>
+<p>   nrm ls 查看所有镜像源</p>
+<p>   nrm use (镜像源名称 ：taobao)</p>
+<p>   // 将md 文件转化为 html 页面</p>
+<p>   npm install i5ting_toc -g</p>
+<p>   i5ting_toc -f 要转换的md文件路径 -o</p>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>
