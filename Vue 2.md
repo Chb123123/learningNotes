@@ -1114,7 +1114,7 @@ const router = new VueRouter({
     <a href="#/about">详细页</a> -->
 ```
 
-##### 路由从定向
+##### 路由重定向
 
 ```javascript
 // 路由从定向 用户访问的 hash地址为 / 时，默认访问, home组件

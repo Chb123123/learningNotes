@@ -6,6 +6,12 @@
 fs.readFile(puth[, options], callback)
 ```
 
+#### 获取文件夹下的文件
+
+```
+fs.readdir(puth[, options], callback)
+```
+
 #### 写入文件
 
 ```javascript
@@ -598,3 +604,78 @@ npm install apidoc -g
 将 scr 下的文件 规定注释的文件转换为 api 文档
 
 apidoc -i src/ -o apidoc/
+
+
+
+#### 表单验证
+
+joi 为表单中携带的每个数据项，定义验证规则
+
+@escook/express-joi 来实现自动对表单数据进行验证的功能
+
+@hapi/joi 使用方法
+
+```js
+// .string() 表示值必须是字符串
+// alphanum() 表示值只能是包含 a-z A-Z 0-9 之间的字符串
+// min(length) 最小长度
+// max(length) 最大长度
+// required() 值为必填项，不能为undefined 
+// pattern(正则表达式) 值必须符合正则表达式的规则
+```
+
+
+
+#### 生成 token 数据
+
+```JS
+// 导入 jsonwebtoken 插件
+// 在全局创建一个 config.js 文件
+module.exports = {
+  jwtSecretKey: 'caihuaibin No1'
+}
+// 在登入接口文件中导入 config.js 文件 和 jsonwebtoken 插件
+const jwt = require('jsonwebtoken')
+const config = requite('config.js路径')
+// 获取用户信息 将不需要的数据剔除
+const userInfo = { ...results[0], password: '', user_pic: '' }
+// 生成 token 字符串
+const tokenStr = jwt.sign(userInfo, config.jwtSecretKey, {
+  expiresIn: '10h' // token有效期为10小时
+})
+// 登成功将生成的 token 数据返回给客户端
+ res.send({
+   status: 200,
+   message: '登入成功',
+   token: 'Bearer ' + tokenStr
+ })
+
+```
+
+#### 解析 token 字符串
+
+```js
+// 安装 express-jwt 版本太高的 插件可能会报错 安装 @5.33
+// 在 app.js 中导入 config.js 文件 和 express-jwt
+const config = require('config.js文件路径')
+const expressJWT = require('express-jwt')
+// 使用 .unless() 指定哪些接口不需要 token 认证
+app.use(expressJWT({ secret: config.jwtSecretKey }.unless({ path: [/^\/api\//] })))
+
+// 在 app.js 错误中间件里捕获 token 认证失败后的错误
+if(err.name === 'UnauthorizedError') return res.cc('token认证失败', 400)
+```
+
+​	
+
+#### 将用户密码加密
+
+```js
+const bcrypt = require('bcryptjs')  // 导入插件
+// 密码加密
+const compareResult = bcrypt.hashSync('需要加密的数据', 10) // 10 表示长度
+// 判断密码是否正确 user.password表示原密码 results[0].password表示数据库密码
+const compareResult = bcrypt.compareSync(user.password, results[0].password) 
+// 当上面的 compareResult 为 true 表示密码正确，false w
+```
+
