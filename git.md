@@ -75,7 +75,7 @@ git rm -f + 文件名
 
 仅从 Git 仓库移除文件 但会保留工作区的 文件
 
-git rm --carhed + 文件名
+git rm --cached + 文件名
 
 
 
@@ -128,11 +128,13 @@ git log -2 --pretty=onelin
 
    git reset --hard<CommitID>
 
-3. 在旧版中使用 git reflog --pretty=oneline 命令查看操作的历史
+#### 回到最新版
+
+1. 在旧版中使用 git reflog --pretty=oneline 命令查看操作的历史
 
    git reflog --pretty=oneline
 
-4. 再次根据最新提交的 ID 跳转到最新的版本
+2. 再次根据最新提交的 ID 跳转到最新的版本
 
    git reset --hard <CommitId>
 

@@ -685,3 +685,38 @@ http请求消息也称为请求报文
 | 501    | Not Implemented       | 服务器不支持该请求方法，无法完成请求，只有在GET 和 HEAD 请求方法是每个服务器必选支持的，其他请求方法在不支持的服务器上会返回 501 |
 | 503    | Service Unavailable   | 由于超载或系统维护，服务器暂时无法处理客户端的请求           |
 
+
+
+
+
+
+
+```vue
+<el-select
+            v-model="formData.poleType"
+            placeholder="请选择内容"
+            style="width: 220px"
+            clearable
+          >
+            <el-option
+              v-for="item in judgmentList"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+```
+
+
+
+```vue
+<el-input
+            clearable
+            style="width: 220px"
+            type="primary"
+            placeholder="请输入内容"
+            v-model="formData.groupName"
+          ></el-input>
+```
+
